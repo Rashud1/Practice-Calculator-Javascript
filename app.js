@@ -4,7 +4,7 @@ const display2E2 = document.querySelector(".display-2")
 const temResultE1 = document.querySelector(".tem-result")
 const numbersE1 = document.querySelectorAll(".number")
 const operationE1 = document.querySelectorAll(".operation")
-const equalE1 = document.querySelectorAll(".equal")
+const equalE1 = document.querySelector(".equal")
 const clearAllE1=document.querySelector(".all-clear")
 const clearLastE1=document.querySelector(".last-entity-clear")
 
@@ -40,6 +40,54 @@ operationE1.forEach((operation)=>{
         lastOperation=operationName
     })
 })
+equalE1.addEventListener("click", (e)=>{
+    if(!dis1Num || !dis2Num) return
+    haveDot=false
+    mathOperation()
+    clearVar()
+    display2E2.innerText=result//it shows the result in main display as I donot want to show in tem result
+    temResultE1.innerText=""
+    dis2Num= result
+    dis1Num=""
+})
+
+clearAllE1.addEventListener("click", (e)=>{
+    display1E1.innerText=""
+    display2E2.innerText=""
+    dis1Num=""
+    dis2Num=""
+    result=""
+    temResultE1.innerText=""
+})
+clearLastE1.addEventListener("click",(e)=>{
+    display2E2.innerText=""
+    dis2Num=""
+})
+windows.addEventListener("keydown",(e)=>{
+    if(
+    e.key === "0" ||
+    e.key === "1" ||
+    e.key === "2" ||
+    e.key === "3" ||
+    e.key === "4" ||
+    e.key === "5" ||
+    e.key === "6" ||
+    e.key === "7" ||
+    e.key === "8" ||
+    e.key === "9" ||
+    e.key === "." 
+) {
+    clickButtonE1(e.key)
+} else if (e.key === "+" || e.key === "-" || e.key === "%"){
+    clickOperation(e.key)
+} else if (e === "*"){
+    clickOperation("X")
+}else{
+    if(e.key == "Enter" || e.key === "=")
+    clickEqual()
+}
+})
+//function
 function clearVar(name=""){
     dis1Num += dis2Num + " "+ name + " "
     display1E1.innerText=dis1Num;
@@ -60,25 +108,13 @@ function mathOperation(){
         result = parseFloat(result) % parseFloat(dis2Num)
     }
 }
-equalE1.addEventListener("click", (e)=>{
-    if(!dis1Num || !dis2Num) return
-    haveDot=false
-    mathOperation()
-    clearVar()
-    display2E2.innerText=result//it shows the result in main display as I donot want to show in tem result
-    temResultE1.innerText=""
-    dis2Num= result
-    dis1Num=""
-})
-clearAllE1.addEventListener("click", (e)=>{
-    display1E1.innerText=""
-    display2E2.innerText=""
-    dis1Num=""
-    dis2Num=""
-    result=""
-    temResultE1.innerText=""
-})
-clearLastE1.addEventListener("click",(e)=>{
-    display2E2.innerText=""
-    dis2Num=""
-})
+function clickOperation(key) {
+    operationE1.forEach((button) =>{
+        if(button.innerText === key){
+            button.click()
+        }
+    })
+}
+function clickEqual(){
+    equalE1.click()
+}
