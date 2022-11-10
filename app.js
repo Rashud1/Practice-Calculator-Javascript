@@ -63,7 +63,7 @@ clearLastE1.addEventListener("click",(e)=>{
     display2E2.innerText=""
     dis2Num=""
 })
-windows.addEventListener("keydown",(e)=>{
+window.addEventListener("keydown",(e)=>{
     if(
     e.key === "0" ||
     e.key === "1" ||
@@ -108,6 +108,14 @@ function mathOperation(){
         result = parseFloat(result) % parseFloat(dis2Num)
     }
 }
+function clickButtonE1(key){
+    numbersE1.forEach((button) =>{
+        if(button.innerText === key){
+            button.click()
+        }
+    })
+}
+
 function clickOperation(key) {
     operationE1.forEach((button) =>{
         if(button.innerText === key){
